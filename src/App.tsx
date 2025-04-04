@@ -22,8 +22,7 @@ function App() {
     const { data, error } = await supabase
       .from('posts')
       .select('*')
-      .order('created_at', { ascending: false })
-      .limit(100);
+      .order('created_at', { ascending: false });
 
     if (error) {
       console.error('Error fetching posts:', error);
@@ -39,7 +38,7 @@ function App() {
       .on('postgres_changes', 
         { event: 'INSERT', schema: 'public', table: 'posts' },
         (payload) => {
-          setPosts(currentPosts => [payload.new as Post, ...currentPosts].slice(0, 100));
+          setPosts(currentPosts => [payload.new as Post, ...currentPosts]);
         }
       )
       .subscribe();
@@ -108,4 +107,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
