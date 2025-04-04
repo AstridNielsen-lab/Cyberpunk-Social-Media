@@ -6,10 +6,10 @@
 
 ## 🌟 Características
 
-- **Timeline Infinita**: Posts organizados cronologicamente
+- **Timeline Pública**: Posts visíveis para todos os visitantes em tempo real
 - **Editor de Posts**: Suporte para texto, imagens e vídeos
 - **Design Cyberpunk**: Interface moderna com tema matrix
-- **Armazenamento Local**: Seus posts são salvos no navegador
+- **Atualizações em Tempo Real**: Novos posts aparecem instantaneamente
 - **Responsivo**: Funciona em qualquer dispositivo
 
 ## 🚀 Como Usar
@@ -23,11 +23,8 @@
 2. **Visualizar Posts**
    - Scroll pela timeline para ver posts anteriores
    - Os posts mais recentes aparecem no topo
-   - Até 100 posts são mantidos no histórico
-
-3. **Reset da Timeline**
-   - Pressione Shift + Clique triplo no botão '+'
-   - Isso limpará todos os posts (use com cuidado!)
+   - Posts são sincronizados em tempo real
+   - Todos os visitantes veem o mesmo conteúdo
 
 ## 💻 Tecnologias
 
@@ -35,11 +32,15 @@
 - TypeScript
 - Tailwind CSS
 - Vite
-- Local Storage para persistência
+- Supabase (banco de dados em tempo real)
+- WebSocket para atualizações instantâneas
 
-## 🔒 Privacidade
+## 🔒 Privacidade e Segurança
 
-Seus dados são armazenados apenas localmente no seu navegador. Não há servidor central ou coleta de dados.
+- Posts são públicos e visíveis para todos
+- Armazenamento seguro em banco de dados Supabase
+- Políticas de segurança implementadas no nível do banco de dados
+- Sem necessidade de login para visualizar posts
 
 ## 🎨 Design
 
@@ -53,7 +54,14 @@ O design cyberpunk inclui:
 
 - Navegadores modernos (Chrome, Firefox, Safari, Edge)
 - Dispositivos móveis e tablets
-- Modo offline disponível
+- Experiência consistente em todas as plataformas
+
+## 🔄 Funcionalidades em Tempo Real
+
+- Posts aparecem instantaneamente para todos os usuários
+- Sem necessidade de atualizar a página
+- Timeline sempre sincronizada
+- Suporte para múltiplos usuários simultâneos
 
 ## 🔗 Links
 
