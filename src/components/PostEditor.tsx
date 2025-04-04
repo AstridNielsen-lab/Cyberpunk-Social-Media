@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ImagePlus, Video, Send } from 'lucide-react';
+import { ImagePlus, Video, Send, X } from 'lucide-react';
 import { Post } from '../types';
 
 interface PostEditorProps {
-  onSubmit: (post: Post) => void;
+  onSubmit: (post: Omit<Post, 'id' | 'created_at'>) => void;
 }
 
 const PostEditor: React.FC<PostEditorProps> = ({ onSubmit }) => {
@@ -15,15 +15,12 @@ const PostEditor: React.FC<PostEditorProps> = ({ onSubmit }) => {
     e.preventDefault();
     if (!content && !imageUrl && !videoUrl) return;
 
-    const post: Post = {
-      id: Date.now(),
+    onSubmit({
       content,
-      imageUrl,
-      videoUrl,
-      timestamp: new Date().toISOString(),
-    };
+      image_url: imageUrl,
+      video_url: videoUrl,
+    });
 
-    onSubmit(post);
     setContent('');
     setImageUrl('');
     setVideoUrl('');

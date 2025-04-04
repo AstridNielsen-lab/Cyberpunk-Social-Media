@@ -20,18 +20,18 @@ const Timeline: React.FC<TimelineProps> = ({ posts }) => {
             <p className="whitespace-pre-wrap mb-4">{post.content}</p>
           )}
 
-          {post.imageUrl && (
+          {post.image_url && (
             <img
-              src={post.imageUrl}
+              src={post.image_url}
               alt=""
               className="max-h-96 object-contain rounded mb-4"
             />
           )}
 
-          {post.videoUrl && (
+          {post.video_url && (
             <div className="aspect-video mb-4">
               <iframe
-                src={post.videoUrl}
+                src={post.video_url}
                 className="w-full h-full rounded"
                 allowFullScreen
               />
@@ -39,7 +39,7 @@ const Timeline: React.FC<TimelineProps> = ({ posts }) => {
           )}
 
           <TimeAgo
-            timestamp={post.timestamp}
+            timestamp={post.created_at}
             className="text-sm text-[#00ff00]/50"
           />
         </article>

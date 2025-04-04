@@ -1,7 +1,7 @@
 export interface Post {
-  id: number;
+  id: string;
   content: string;
-  imageUrl?: string;
-  videoUrl?: string;
-  timestamp: string;
+  image_url?: string;
+  video_url?: string;
+  created_at: string;
 }
