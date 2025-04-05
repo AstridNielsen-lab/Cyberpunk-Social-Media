@@ -5,7 +5,7 @@ import Timeline from './components/Timeline';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
 import { Post } from './types';
-import { supabase } from './lib/supabase';
+import { loadPosts, savePosts } from './lib/posts';
 
 function App() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -13,51 +13,22 @@ function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    fetchPosts();
-    subscribeToNewPosts();
+    loadPosts().then(setPosts);
     setTimeout(() => setShowSplash(false), 3000);
   }, []);
 
-  const fetchPosts = async () => {
-    const { data, error } = await supabase
-      .from('posts')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Error fetching posts:', error);
-      return;
-    }
-
-    setPosts(data || []);
-  };
-
-  const subscribeToNewPosts = () => {
-    supabase
-      .channel('public:posts')
-      .on('postgres_changes', 
-        { event: 'INSERT', schema: 'public', table: 'posts' },
-        (payload) => {
-          setPosts(currentPosts => [payload.new as Post, ...currentPosts]);
-        }
-      )
-      .subscribe();
-  };
-
   const handleCreatePost = async (post: Omit<Post, 'id' | 'created_at'>) => {
-    const { error } = await supabase
-      .from('posts')
-      .insert([{
-        content: post.content,
-        image_url: post.image_url,
-        video_url: post.video_url
-      }]);
+    const newPost: Post = {
+      id: crypto.randomUUID(),
+      content: post.content,
+      image_url: post.image_url,
+      video_url: post.video_url,
+      created_at: new Date().toISOString()
+    };
 
-    if (error) {
-      console.error('Error creating post:', error);
-      return;
-    }
-
+    const updatedPosts = [newPost, ...posts];
+    setPosts(updatedPosts);
+    await savePosts(updatedPosts);
     setIsEditorOpen(false);
   };
 
@@ -107,4 +78,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
